@@ -21,7 +21,7 @@ async function InsertProdutos(req, res) {
         preco,
     } = req.body
 
-  await produtosModel.InsertProdutosModel(
+  await produtosModel.insertProdutosModel(
         nome,
         preco
   )
@@ -40,7 +40,7 @@ async function updateProdutos(req, res) {
 
 async function deleteProdutos(req, res) {
     const { id } = req.params
-    
+
     await produtosModel.deleteProdutoModel(id)
              
     return res.send("Produto deletado com sucesso")
