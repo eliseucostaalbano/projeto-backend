@@ -42,7 +42,7 @@ async function getProdutosByIdModel(id){
     DELETE FROM produtos WHERE id = ${id}
    `)
   }
-  
+
 module.exports = {
     getAllProdutosModel,
     insertProdutosModel,
