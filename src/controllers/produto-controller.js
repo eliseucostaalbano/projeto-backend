@@ -21,7 +21,7 @@ async function InsertProdutos(req, res) {
         preco,
     } = req.body
 
-  await produtosModel.InsertProdutosModel(
+  await produtosModel.insertProdutosModel(
         nome,
         preco
   )
