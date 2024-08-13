@@ -6,7 +6,7 @@ async function insertProdutosMiddlleWare(req, res, next){
     if(!nome || !preco) {
         return res.status(400).send("Dados Inválidos")
     }
-    
+
     next();
 }
 
@@ -28,7 +28,7 @@ async function middlewareUpadateProdutos(req, res, next) {
         return res.status(400).send("Dados incompletos")
     }
 
-    const produto = await produtoModelModel.getProdutoByIdModel(id)
+    const produto = await produtoModel.getProdutosByIdModel(id)
     if (!produto) {
         res.status(404).send("Produto não encontrado")
     }
