@@ -1,4 +1,16 @@
-// const userModel = require('../models/usersModel');
+const usuarioModel = require("../models/usuario-Models")
+
+async function getDetalhesUsuarioByIdMiddleware(req, res, next){
+    const {id} = req.params;
+    const usuario = await usuarioModel.getDetalhesUsuarioById(id);
+
+    //middleware
+    if(!usuario){
+        return res.status(404).send("Usuário não encontrado");
+    }
+
+    next();
+}
 
 async function insertUserMiddleware(req, res, next){
     const { nome, email, senha } = req.body;
@@ -18,6 +30,46 @@ async function insertUserMiddleware(req, res, next){
     next();
 }
 
+async function updateUsuarioMiddleware(req, res, next){
+    const { campo, valor } = req.body;
+    const {id} = req.params;
+
+    const usuario = await usuarioModel.getUsuarioByIdModel(id);
+
+    if(!usuario) {
+        return res.status(400).send("Usuário inválido!");
+    }
+
+    if(!campo || !valor){
+        return res.status(400).send("Dados incompletos!");
+    }
+
+    next();
+}
+
+async function deleteUsuarioMiddleware(req, res, next){
+    const {id} = req.params;
+
+    if(!id){
+        return res.status(400).send("Dados incompletos");
+    }
+
+    const user = await usuarioModel.getUsuarioByIdModel(id)
+
+    if(!user){
+        return res.status(404).send("Usuário não encontrado");
+    }
+
+    next();
+}
+
+
+
+
+
 module.exports = {
-    insertUserMiddleware
+    insertUserMiddleware,
+    updateUsuarioMiddleware,
+    deleteUsuarioMiddleware,
+    getDetalhesUsuarioByIdMiddleware
 }
