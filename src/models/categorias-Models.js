@@ -23,16 +23,13 @@ async function getCategoriaByNameModel(nome){
 
 }
 
-async function insertNovaCategoriaModel(id, nome) {
+async function insertNovaCategoriaModel(nome_categoria) {
     await connection.query(
 
         `INSERT INTO categorias(
-        id , nome 
-        VALUES(
-        ${id},
-        '${nome}'
+        nome_categoria)
 
-        )
+        VALUES('${nome_categoria}'
         
         )`
         
@@ -43,7 +40,7 @@ async function insertNovaCategoriaModel(id, nome) {
 
 async function updateCategoriaModel(nome){
     await connection.query(
-        `   UPDATE categorias SET nome LIKE '${nome}'`
+        ` UPDATE categorias SET nome LIKE '${nome}'`
     )
     return;
  
