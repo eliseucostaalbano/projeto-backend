@@ -1,3 +1,5 @@
+const connection = require('./connection');
+
 async function getAllProdutosModel(){
     const produtos = await connection.query(
         'SELECT * FROM produtos'
