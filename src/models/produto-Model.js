@@ -1,3 +1,5 @@
+const connection = require('./connection')
+
 async function getAllProdutosModel(){
     const produtos = await connection.query(
         'SELECT * FROM produtos'
@@ -6,11 +8,11 @@ async function getAllProdutosModel(){
     return produtos.rows;
 }
 
-async function insertProdutosModel(nome, preco) {
+async function insertProdutosModel(nome, preco, categoria) {
     await connection.query(
         `INSERT INTO produtos ( nome, preco, id_categoria) VALUES (
             '${nome}',
-            '${preco}'
+            '${preco}',
             ${categoria}
         )`
     )
@@ -22,17 +24,17 @@ async function getProdutosByIdModel(id){
      `SELECT nome,
              preco,
              id_categoria
-             FROM users WHERE id = ${id}`
+             FROM produtos WHERE id = ${id}`
     )
  
     return produtos.rows[0]
  }
 
- async function updateProdutosModel(id, nome, preco){
+ async function updateProdutosModel(id, nome, preco , categoria){
     await connection.query(`
       UPDATE produtos SET  
-      nome = ${nome},
-      preco = ${preco},
+      nome = '${nome}',
+      preco = '${preco}',
       id_categoria = ${categoria}
       WHERE id = ${id}
     `)
