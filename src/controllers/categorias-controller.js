@@ -14,8 +14,9 @@ async function getCategoriaById(req, res) {
 }
 
 async function insertNovaCategoria (req, res) {
-    const {id, nome} = req.body;
-    await categoriasModels.insertNovaCategoriaModel(id,nome)
+
+    const {nome} = req.body;
+    await categoriasModels.insertNovaCategoriaModel(nome)
 
     return res.status(201).send ("Categoria inserida com sucesso");
     
