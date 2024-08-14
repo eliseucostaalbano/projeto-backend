@@ -8,9 +8,10 @@ async function getAllProdutosModel(){
 
 async function insertProdutosModel(nome, preco) {
     await connection.query(
-        `INSERT INTO produtos ( nome, preco) VALUES (
+        `INSERT INTO produtos ( nome, preco, id_categoria) VALUES (
             '${nome}',
             '${preco}'
+            '${categoria}'
         )`
     )
     return
@@ -19,7 +20,8 @@ async function insertProdutosModel(nome, preco) {
 async function getProdutosByIdModel(id){
     const produtos = await connection.query(
      `SELECT nome,
-             preco
+             preco,
+             id_categoria
              FROM users WHERE id = ${id}`
     )
  
@@ -31,6 +33,7 @@ async function getProdutosByIdModel(id){
       UPDATE produtos SET  
       nome = ${nome},
       preco = ${preco},
+      id_categoria = ${categoria}
       WHERE id = ${id}
     `)
     return;

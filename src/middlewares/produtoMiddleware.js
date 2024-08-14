@@ -1,9 +1,9 @@
 const produtoModel = require('../models/produtoModel')
 
 async function insertProdutosMiddlleWare(req, res, next){
-    const { nome, preco} = req.body;
+    const { nome, preco, categoria} = req.body;
 
-    if(!nome || !preco) {
+    if(!nome || !preco || !categoria) {
         return res.status(400).send("Dados Inválidos")
     }
 
@@ -22,9 +22,9 @@ async function middleWareGetProdutosBYId(req, res, next) {
 
 async function middlewareUpadateProdutos(req, res, next) {
     const { id } = req.params
-    const { nome, preco } = req.body
+    const { nome, preco, categoria } = req.body
 
-    if (!id || !nome || !preco) {
+    if (!id || !nome || !preco || !categoria) {
         return res.status(400).send("Dados incompletos")
     }
 

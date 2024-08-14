@@ -19,11 +19,13 @@ async function InsertProdutos(req, res) {
     const {
         nome,
         preco,
+        categoria
     } = req.body
 
   await produtosModel.insertProdutosModel(
         nome,
-        preco
+        preco,
+        categoria
   )
 
     res.status(201).send("Produto Inserido com sucesso")
@@ -31,9 +33,9 @@ async function InsertProdutos(req, res) {
 
 async function updateProdutos(req, res) {
     const { id } = req.params
-    const { nome, preco } = req.body
+    const { nome, preco , categoria } = req.body
 
-    await produtosModel.updateProdutosModel(id,nome , preco)
+    await produtosModel.updateProdutosModel(id, nome , preco, categoria)
 
     return res.send("Produto atualizado com sucesso")
 }
