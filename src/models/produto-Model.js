@@ -24,7 +24,7 @@ async function getProdutosByIdModel(id){
      `SELECT nome,
              preco,
              id_categoria
-             FROM users WHERE id = ${id}`
+             FROM produtos WHERE id = ${id}`
     )
  
     return produtos.rows[0]
