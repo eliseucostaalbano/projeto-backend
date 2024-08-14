@@ -11,7 +11,7 @@ async function insertProdutosModel(nome, preco) {
         `INSERT INTO produtos ( nome, preco, id_categoria) VALUES (
             '${nome}',
             '${preco}'
-            '${categoria}'
+            ${categoria}
         )`
     )
     return
