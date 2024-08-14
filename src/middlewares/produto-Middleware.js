@@ -1,4 +1,6 @@
-const produtoModel = require('../models/produtoModel')
+
+
+const produtoModel = require('../models/produto-Model')
 
 async function insertProdutosMiddlleWare(req, res, next){
     const { nome, preco, categoria} = req.body;
@@ -37,13 +39,15 @@ async function middlewareUpadateProdutos(req, res, next) {
 }
 
 async function middlewareDeleteProdutos(req, res, next){
-   const  {id} = req.params
+   const { id } = req.params
+   const produto = await produtoModel.getProdutosByIdModel(id)
+
    if(!id){
     return res.status(400).send("Dados Invalidos")
    }
-   const produto = await produtoModel.getProdutoByIdModel(id)    
+
     if(!produto){
-        return res.status(404).send("Produto não encontradao ou já deletado")
+        return res.status(404).send("Produto não encontrado ou já deletado")
     }
    next()
 }
