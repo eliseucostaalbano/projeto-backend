@@ -26,12 +26,9 @@ async function getCategoriaByNameModel(nome){
 async function insertNovaCategoriaModel(nome_categoria) {
     await connection.query(
 
-        `INSERT INTO categorias(
-        nome_categoria)
-
+        `INSERT INTO categorias(nome_categoria) 
         VALUES('${nome_categoria}'
-        
-        )`
+    )`
         
     )
     return;
