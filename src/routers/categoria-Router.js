@@ -3,7 +3,7 @@ const router = express.Router();
 
 const categoriasController = require('../controllers/categorias-controller');
 const categoriasMiddleware = require('../middlewares/categoria-Middleware')
-// const validadorMiddleware = require('../middlewares/validador-middleware')
+//const validadorMiddleware = require('../middlewares/validador-middleware')
 
 router.get('/categorias',
     categoriasController.getAllCategorias);
