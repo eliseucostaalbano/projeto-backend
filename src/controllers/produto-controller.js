@@ -2,7 +2,9 @@ const produtosModel = require("../models/produtoModel")
 
 
  async function getAllProdutos(req, res) {
-    const produtos = await produtosModel.getAllProdutosModel()
+
+     const produtos = await produtosModel.getAllProdutosModel()
+    
    return  res.send(produtos)
 }
 
