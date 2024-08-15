@@ -24,13 +24,13 @@ async function getProdutosByIdModel(id){
      `SELECT nome,
              preco,
              id_categoria
-             FROM users WHERE id = ${id}`
+             FROM produtos WHERE id = ${id}`
     )
  
     return produtos.rows[0]
  }
 
- async function updateProdutosModel(id, nome, preco){
+ async function updateProdutosModel(id, nome, preco, id_categoria){
     await connection.query(`
       UPDATE produtos SET  
       nome = ${nome},
