@@ -30,7 +30,7 @@ async function getProdutosByIdModel(id){
     return produtos.rows[0]
  }
 
- async function updateProdutosModel(id, nome, preco , id_categoria){
+ async function updateProdutosModel(id, nome, preco , categoria){
     await connection.query(`
       UPDATE produtos SET  
       nome = ${nome},
