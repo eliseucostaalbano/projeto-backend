@@ -13,8 +13,9 @@ async function getAllMesas(req, res) {
 async function getMesasById(req, res) {
     const { id } = req.params;
     try {
-        var mesa = await mesasModel.getMesaByIdModel(id)
 
+        var mesa = await mesasModel.getMesaByIdModel(id)
+        
     } catch (error) {
         return res.send(error.message).status(400)
 

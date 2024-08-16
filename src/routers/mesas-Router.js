@@ -5,6 +5,7 @@ const mesasMiddleware = require('../middlewares/mesas-Middleware')
 const mesasController = require('../controllers/mesas-controller')
 const validadorMiddleware = require('../middlewares/validador-middleware')
 
+
 router.get('/mesas',validadorMiddleware.validateTokenMiddleware ,mesasController.getAllMesas)
 router.get('/mesas/:id',validadorMiddleware.validateTokenMiddleware ,mesasMiddleware.middleWareGetMesasBYId, mesasController.getMesasById)
 router.post('/mesas',validadorMiddleware.validateTokenMiddleware ,mesasMiddleware.insertMesasMiddlleWare , mesasController.insertMesas)
