@@ -1,17 +1,17 @@
 
-const produtoModel = require('../models/produto-Model')
+const mesasModel = require('../models/mesas-Model')
 
-async function insertProdutosMiddlleWare(req, res, next){
-    const { nome, preco, categoria} = req.body;
+async function insertMesasMiddlleWare(req, res, next){
+    const { numero} = req.body;
 
-    if(!nome || !preco || !categoria) {
+    if(!numero) {
         return res.status(400).send("Dados Inválidos")
     }
 
     next();
 }
 
-async function middleWareGetProdutosBYId(req, res, next) {
+async function middleWareGetMesasBYId(req, res, next) {
     const { id } = req.params;
    
     if (!id) {
@@ -21,32 +21,39 @@ async function middleWareGetProdutosBYId(req, res, next) {
     next()
 }
 
-async function middlewareUpadateProdutos(req, res, next) {
+async function middlewareUpadateMesas(req, res, next) {
     const { id } = req.params
-    const { nome, preco, categoria } = req.body
+    const { numero} = req.body
 
-    if (!id || !nome || !preco || !categoria) {
+    if (!id || !numero) {
         return res.status(400).send("Dados incompletos")
     }
 
-    const produto = await produtoModel.getProdutosByIdModel(id)
-    if (!produto) {
+    const mesa = await mesasModel.getMesaByIdModel(id)
+    if (!mesa) {
         res.status(404).send("Produto não encontrado")
     }
 
     next()
 }
 
-async function middlewareDeleteProdutos(req, res, next){
+async function middlewareDeleteMesas(req, res, next){
    const { id } = req.params
-   const produto = await produtoModel.getProdutosByIdModel(id)
+   const mesa = await mesasModel.getMesaByIdModel(id)
 
    if(!id){
     return res.status(400).send("Dados Invalidos")
    }
 
-    if(!produto){
+    if(!mesa){
         return res.status(404).send("Produto não encontrado ou já deletado")
     }
    next()
+}
+
+module.exports = {
+    insertMesasMiddlleWare,
+    middleWareGetMesasBYId,
+    middlewareUpadateMesas,
+    middlewareDeleteMesas,
 }
