@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const categoriaRota = require('./routers/categoria-Router')
 
 const usuarioRotas = require("./routers/usuario-Routers");
 const produtoRotas = require("./routers/produto-Router")
