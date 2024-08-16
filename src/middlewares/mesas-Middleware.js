@@ -31,7 +31,7 @@ async function middlewareUpadateMesas(req, res, next) {
 
     const mesa = await mesasModel.getMesaByIdModel(id)
     if (!mesa) {
-        res.status(404).send("Produto não encontrado")
+        res.status(404).send("Mesa não encontrada")
     }
 
     next()
@@ -46,7 +46,7 @@ async function middlewareDeleteMesas(req, res, next){
    }
 
     if(!mesa){
-        return res.status(404).send("Produto não encontrado ou já deletado")
+        return res.status(404).send("Mesa não encontrada ou já deletada")
     }
    next()
 }
