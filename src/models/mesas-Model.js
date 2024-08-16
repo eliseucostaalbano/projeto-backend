@@ -15,7 +15,7 @@ async function getMesaByIdModel(id){
     return categorias.rows[0];
 }
 
-async function insertNovaMesaModel(numero) {
+async function insertMesaModel(numero) {
     await connection.query(
 
         `INSERT INTO categorias(numeromesa) 
@@ -28,7 +28,7 @@ async function insertNovaMesaModel(numero) {
     
 }
 
-async function updateMesa(id, numero) {
+async function updateMesaModel(id, numero) {
     await connection.query(`
         UPDATE mesas
         SET numeromesa = ${numero}
@@ -47,7 +47,7 @@ async function deleteMesaModel(id){
    module.exports ={
     getAllMesasModel,
     getMesaByIdModel,
-    insertNovaMesaModel,
-    updateMesa,
+    insertMesaModel,
+    updateMesaModel,
     deleteMesaModel,
    }
