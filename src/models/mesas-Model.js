@@ -18,7 +18,7 @@ async function getMesaByIdModel(id){
 async function insertMesaModel(numero) {
     await connection.query(
 
-        `INSERT INTO categorias(numeromesa) 
+        `INSERT INTO mesas(numeromesa) 
         VALUES('
         ${numero}'
     )`
