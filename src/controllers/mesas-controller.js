@@ -15,6 +15,7 @@ async function getMesasById(req, res) {
     try {
         var mesa = await mesasModel.getMesaByIdModel(id)
 
+        
     } catch (error) {
         return res.send(error.message).status(400)
 
