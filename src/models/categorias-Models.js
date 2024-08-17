@@ -23,27 +23,21 @@ async function getCategoriaByNameModel(nome){
 
 }
 
-async function insertNovaCategoriaModel(id, nome) {
+async function insertNovaCategoriaModel(nome_categoria) {
     await connection.query(
 
-        `INSERT INTO categorias(
-        id , nome 
-        VALUES(
-        ${id},
-        '${nome}'
-
-        )
-        
-        )`
+        `INSERT INTO categorias(nome_categoria) 
+        VALUES('${nome_categoria}'
+    )`
         
     )
     return;
     
 }
 
-async function updateCategoriaModel(nome){
+async function updateCategoriaModel(nome_categoria){
     await connection.query(
-        `   UPDATE categorias SET nome LIKE '${nome}'`
+        ` UPDATE categorias SET nome_categoria LIKE '${nome_categoria}'`
     )
     return;
  
@@ -51,9 +45,9 @@ async function updateCategoriaModel(nome){
 
 async function deleteCategoriaModel(id) {
     await connection.query(
-        `DELETE FROM animes WHERE id = ${id}`
+        `DELETE FROM categorias WHERE id = ${id}`
     )
-    
+    return;
 }
 
 module.exports ={

@@ -1,6 +1,7 @@
 const produtosModel = require("../models/produto-Model")
 
 
+
 async function getAllProdutos(req, res) {
     try {
         var produtos = await produtosModel.getAllProdutosModel()
