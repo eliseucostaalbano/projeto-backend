@@ -20,4 +20,4 @@ router.put('/categorias/:nome',validadorMiddleware.validateTokenMiddleware,categ
 router.delete('/categorias/:id',validadorMiddleware.validateTokenMiddleware,categoriasMiddleware.deleteCategoriaMiddleware,
      categoriasController.deleteCategoria);
 
-     module.exports = router
+     module.exports = {router} 

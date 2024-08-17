@@ -6,9 +6,10 @@ async function getAllCategorias(req, res){
         const categorias = await categoriasModels.getAllCategoriasModel()
         
     } catch (error) {
+        return res.status(400).send(error.message)
         
-        return res.send(categorias);
     }
+    return res.send(categorias);
 }
 
 async function getCategoriaById(req, res) {
@@ -17,9 +18,11 @@ async function getCategoriaById(req, res) {
         const categorias = await categoriasModels.getCategoriaByIdModel(id)
         
     } catch (error) {
-    return res.send(categorias);
-        
+    
+        return res.status(400).send(error.message)
+
     }
+    return res.send(categorias);
 
 
 }
@@ -31,9 +34,11 @@ async function insertNovaCategoria (req, res) {
         await categoriasModels.insertNovaCategoriaModel(nome)
         
     } catch (error) {
-        return res.status(201).send ("Categoria inserida com sucesso");
+        return res.status(400).send(error.message)
         
     }
+
+    return res.status(201).send("Categoria inserida com sucesso");
 
     
 }
@@ -45,10 +50,11 @@ async function updateCategoria(req, res) {
         await categoriasModels.updateCategoriaModel(nome);
         
     } catch (error) {
-    return res.send("Categoria atualizada com sucesso")
+    return res.status(400).send(error.message)
         
     }
 
+    return res.status(201).send("Categoria atualizada com sucesso")
 
     
 }
@@ -60,9 +66,10 @@ async function deleteCategoria(req, res) {
         await categoriasModels.deleteCategoriaModel(id)
         
     } catch (error) {
-        return res.send("Categoria deletada")
+        return res.status(400).send(error.message)
         
     }
+    return res.status(201).send("Categoria deletada com sucesso")
 
     
 }
