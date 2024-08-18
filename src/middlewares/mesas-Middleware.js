@@ -2,10 +2,14 @@
 const mesasModel = require('../models/mesas-Model')
 
 async function insertMesasMiddlleWare(req, res, next){
-    const { numero} = req.body;
+    const {numeromesa} = req.body;
 
-    if(!numero) {
+    if(!numeromesa) {
         return res.status(400).send("Dados Inválidos")
+    }
+
+    if(numeromesa){
+        return res.status(400).send("Mesa já inserida!");
     }
 
     next();
