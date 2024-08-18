@@ -38,9 +38,9 @@ async function insertMesas(req, res) {
 
 async function updateMesas(req, res) {
     const { id } = req.params
-    const { numero} = req.body
+    const { numeromesa} = req.body
     try {
-        await mesasModel.updateMesaModel(id, numero)
+        await mesasModel.updateMesaModel(id, numeromesa)
     } catch (error) {
         return res.send(error.message).status(400)
     }

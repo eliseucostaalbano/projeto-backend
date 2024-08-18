@@ -4,7 +4,7 @@ async function getAllCategoriasModel(){
     const categorias =  await connection.query(
         `SELECT * FROM categorias`
     )
-    return categorias.rows
+    return categorias.rows;
       
 }
 
@@ -17,9 +17,9 @@ async function getCategoriaByIdModel(id){
 
 async function getCategoriaByNameModel(nome){
     const categorias = await connection.query(
-        `SELECT * FROM categorias WHERE nome LIKE '${nome}'`
+        `SELECT * FROM categorias WHERE nome_categoria LIKE '${nome}'`
     )
-    return categorias.rows [0];
+    return categorias.rows[0];
 
 }
 
@@ -35,9 +35,11 @@ async function insertNovaCategoriaModel(nome_categoria) {
     
 }
 
-async function updateCategoriaModel(nome_categoria){
+async function updateCategoriaModel(nome_categoria,id){
     await connection.query(
-        ` UPDATE categorias SET nome_categoria LIKE '${nome_categoria}'`
+        ` UPDATE categorias SET nome_categoria = '${nome_categoria}'
+        WHERE id = ${id}
+        `
     )
     return;
  

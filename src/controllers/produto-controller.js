@@ -30,13 +30,13 @@ async function InsertProdutos(req, res) {
     const {
         nome,
         preco,
-        categoria
+        id_categoria
     } = req.body
     try {
         await produtosModel.insertProdutosModel(
             nome,
             preco,
-            categoria
+            id_categoria
         )
     } catch (error) {
         return res.send(error.message).status(400)
@@ -48,9 +48,9 @@ async function InsertProdutos(req, res) {
 
 async function updateProdutos(req, res) {
     const { id } = req.params
-    const { nome, preco, categoria } = req.body
+    const { nome, preco, id_categoria } = req.body
     try {
-        await produtosModel.updateProdutosModel(id, nome, preco, categoria)
+        await produtosModel.updateProdutosModel(id, nome, preco, id_categoria)
     } catch (error) {
         return res.send(error.message).status(400)
     }

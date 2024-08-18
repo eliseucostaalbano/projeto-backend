@@ -14,10 +14,10 @@ router.get('/categorias/:id',validadorMiddleware.validateTokenMiddleware,categor
 router.post('/categorias',validadorMiddleware.validateTokenMiddleware,categoriasMiddleware.insertNovaCategoriaMiddleware,
      categoriasController.insertNovaCategoria);
 
-router.put('/categorias/:nome',validadorMiddleware.validateTokenMiddleware,categoriasMiddleware.updateCategoriaMiddleware,
+router.put('/categorias/:id',validadorMiddleware.validateTokenMiddleware,categoriasMiddleware.updateCategoriaMiddleware,
      categoriasController.updateCategoria);
 
 router.delete('/categorias/:id',validadorMiddleware.validateTokenMiddleware,categoriasMiddleware.deleteCategoriaMiddleware,
      categoriasController.deleteCategoria);
 
-     module.exports = {router} 
+     module.exports = router

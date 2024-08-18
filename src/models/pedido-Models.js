@@ -57,12 +57,12 @@ async function listarPedidosModel() {
         ORDER By criado_em DESC;
     `)
 
-    return pedidos.rows[0];
+    return pedidos.rows;
 }
 
 async function detalhespedidoModel(id) {
     const detalhesPedido = await connection.query(`
-        SELECt quantidade, id_produto FROM itenspedidos ip
+        SELECT quantidade, id_produto FROM itenspedidos ip
         INNER JOIN mesas me ON ip.id_mesa = me.id
         INNER JOIN produtos pro ON ip.id_produto = pro.id
         WHERE ip.id_mesa = ${id}
@@ -82,7 +82,7 @@ async function finalizaPedidoModel(id) {
 }
 
 async function deletaPedidoModel(id) {
-    const pedido = await connection.query(`
+     await connection.query(`
         DELETE FROM pedidos
         WHERE id=${id}
     `)
