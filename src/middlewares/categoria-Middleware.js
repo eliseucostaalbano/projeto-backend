@@ -42,17 +42,16 @@ async function insertNovaCategoriaMiddleware (req, res, next){
 }
 
 async function updateCategoriaMiddleware (req, res, next){
-    const {nome_categoria} = req.params;
+    const {id} = req.params;
+    const {nome_categoria} = req.body;
 
-    if(!nome_categoria){
+    if(!nome_categoria || !id){
         return res.status (404).send("Dados incompletos!")
     }
-    const categoria = await categoriasModels.getCategoriaByNameModel(nome_categoria)
+    const categoria = await categoriasModels.getCategoriaByIdModel(id)
 
     if(!categoria){
         return res.status (404).send("Categoria não encontrada!")
-
-
     }
     next();
 

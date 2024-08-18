@@ -3,7 +3,7 @@ const categoriasModels = require('../models/categorias-Models')
 async function getAllCategorias(req, res){
 
     try {
-        const categorias = await categoriasModels.getAllCategoriasModel()
+        var categorias = await categoriasModels.getAllCategoriasModel()
         
     } catch (error) {
         return res.status(400).send(error.message)
@@ -15,7 +15,7 @@ async function getAllCategorias(req, res){
 async function getCategoriaById(req, res) {
     const {id} = req.params;
     try {
-        const categorias = await categoriasModels.getCategoriaByIdModel(id)
+        var categorias = await categoriasModels.getCategoriaByIdModel(id)
         
     } catch (error) {
     
@@ -44,10 +44,11 @@ async function insertNovaCategoria (req, res) {
 }
 
 async function updateCategoria(req, res) {
-    const {nome} = req.params;
+    const {id} = req.params;
+    const {nome_categoria} = req.body;
 
     try {
-        await categoriasModels.updateCategoriaModel(nome);
+        await categoriasModels.updateCategoriaModel(nome_categoria, id);
         
     } catch (error) {
     return res.status(400).send(error.message)

@@ -21,5 +21,6 @@ app.use(produtoRotas);
 
 app.use(mesasRotas)
 app.use(pedidoRota)
+app.use(categoriaRotas);
 
 module.exports = app;

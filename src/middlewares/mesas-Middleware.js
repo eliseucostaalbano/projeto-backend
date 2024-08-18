@@ -3,12 +3,14 @@ const mesasModel = require('../models/mesas-Model')
 
 async function insertMesasMiddlleWare(req, res, next){
     const {numeromesa} = req.body;
-
+    // const {id} = req.params;
     if(!numeromesa) {
-        return res.status(400).send("Dados Inválidos")
+        return res.status(400).send("Dados Inválidos");
     }
 
-    if(numeromesa){
+    const mesa = await mesasModel.pegaMesaPeloNumeroModel(numeromesa);
+    
+    if(mesa){
         return res.status(400).send("Mesa já inserida!");
     }
 
@@ -27,9 +29,9 @@ async function middleWareGetMesasBYId(req, res, next) {
 
 async function middlewareUpadateMesas(req, res, next) {
     const { id } = req.params
-    const { numero} = req.body
+    const { numeromesa} = req.body
 
-    if (!id || !numero) {
+    if (!id || !numeromesa) {
         return res.status(400).send("Dados incompletos")
     }
 

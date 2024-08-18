@@ -44,7 +44,7 @@ async function updateUser(req, res) {
         return res.status(400).send("Erro aqui")
     }
 
-    return res.status(201).send("Usuário inserido com sucesso!");
+    return res.status(201).send("Usuário atualizado com sucesso!");
 }
 
 async function deleteUser(req, res) {

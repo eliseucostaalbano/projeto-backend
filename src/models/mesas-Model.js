@@ -1,31 +1,32 @@
 const connection = require('./connection')
 
-async function getAllMesasModel(){
-    const categorias =  await connection.query(
-        `SELECT * FROM mesas`
+async function getAllMesasModel() {
+    const categorias = await connection.query(
+        `SELECT * FROM mesas
+        ORDER By numeromesa ASC`
     )
     return categorias.rows
-      
+
 }
 
-async function getMesaByIdModel(id){
-    const categorias =  await connection.query(
+async function getMesaByIdModel(id) {
+    const categorias = await connection.query(
         `SELECT * FROM mesas WHERE id = ${id}`
     )
     return categorias.rows[0];
 }
 
-async function insertMesaModel(numero) {
+async function insertMesaModel(numeromesa) {
     await connection.query(
 
         `INSERT INTO mesas(numeromesa) 
-        VALUES('
-        ${numero}'
+        VALUES(
+        ${numeromesa}
     )`
-        
+
     )
     return;
-    
+
 }
 
 async function updateMesaModel(id, numero) {
@@ -38,16 +39,26 @@ async function updateMesaModel(id, numero) {
     return;
 }
 
-async function deleteMesaModel(id){
+async function deleteMesaModel(id) {
     await connection.query(`
      DELETE FROM mesas WHERE id = ${id}
     `)
-   }
+}
 
-   module.exports ={
+async function pegaMesaPeloNumeroModel(numeromesa) {
+    const mesa = await connection.query(`
+        SELECT * FROM mesas
+        WHERE numeromesa = ${numeromesa}        
+   `)
+
+   return mesa.rows[0];
+}
+
+module.exports = {
     getAllMesasModel,
     getMesaByIdModel,
     insertMesaModel,
     updateMesaModel,
     deleteMesaModel,
-   }
+    pegaMesaPeloNumeroModel
+}
