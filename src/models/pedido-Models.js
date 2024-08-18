@@ -9,6 +9,15 @@ async function criarPedidoModel( id_usuario, id_mesa){
     return;
 }
 
+async function pegaPedidoPeloIdModel(id) {
+    const pedido = await connection.query(`
+        SELECT * FROM pedidos
+        WHERE id = ${id}
+    `)
+
+    return pedido.rows[0];
+}
+
 async function atualizaStatusMesa(id){
     await connection.query(`
         UPDATE mesas
@@ -51,11 +60,44 @@ async function listarPedidosModel() {
     return pedidos.rows[0];
 }
 
+async function detalhespedidoModel(id) {
+    const detalhesPedido = await connection.query(`
+        SELECt quantidade, id_produto FROM itenspedidos ip
+        INNER JOIN mesas me ON ip.id_mesa = me.id
+        INNER JOIN produtos pro ON ip.id_produto = pro.id
+        WHERE ip.id_mesa = ${id}
+    `)
+
+    return detalhesPedido.rows;
+}
+
+async function finalizaPedidoModel(id) {
+    await connection.query(`
+        UPDATE mesas
+        SET status = false
+        WHERE id = ${id}
+    `)
+
+    return;
+}
+
+async function deletaPedidoModel(id) {
+    const pedido = await connection.query(`
+        DELETE FROM pedidos
+        WHERE id=${id}
+    `)
+    return;
+}
+
 module.exports = {
     criarPedidoModel,
     atualizaStatusMesa,
     statusPorId,
     inserirItemPedidoModel,
     deletaItemPedidoModel,
-    listarPedidosModel
+    listarPedidosModel,
+    detalhespedidoModel,
+    finalizaPedidoModel,
+    deletaPedidoModel,
+    pegaPedidoPeloIdModel
 }

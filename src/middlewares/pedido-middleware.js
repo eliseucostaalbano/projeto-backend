@@ -1,5 +1,5 @@
 const pedidoModel = require("../models/pedido-Models");
-
+const mesasModel = require("../models/mesas-Model")
 async function criarPedidoMiddleware(req, res, next){
     const {id_usuario, id_mesa} = req.body;
 
@@ -26,6 +26,22 @@ async function inserirItemPedidoMiddleware(req, res,next) {
     next();
 }
 
+async function pegaPedidoPeloIdMiddleware(req,res,next) {
+    const {id} = req.body;
+
+    if(!id) {
+        return res.status(404).send("dado inválido!");
+    }
+
+    const pedido = await pedidoModel.pegaPedidoPeloIdModel(id);
+
+    if(!pedido){
+        return res.status(400).send("Pedido não encontrado!");
+    }
+
+    next();
+}
+
 async function deletaItemPedidoMiddleware(req,res, next) {
     const { id } = req.params;
     const itemProduto = await pedidoModel.deletaItemPedidoModel(id)
@@ -40,8 +56,48 @@ async function deletaItemPedidoMiddleware(req,res, next) {
     next();
 }
 
-async function listarPedidos(params) {
-    
+async function detalhespedidoMiddleware(req, res, next) {
+    const {id} = req.params;
+    const pedido = await mesasModel.getMesaByIdModel(id)
+
+    if(!id) {
+        return res.status(404).send("dado inválido!");
+    }
+
+    if(!pedido){
+        return res.status(400).send("Mesa não encontrada!");
+    }
+
+    next();
+}
+
+async function finalizaPedidoMiddleware(req,res,next) {
+    const {id} = req.params;
+    const pedido = await mesasModel.getMesaByIdModel(id)
+
+    if(!id) {
+        return res.status(404).send("dado inválido!");
+    }
+
+    if(!pedido){
+        return res.status(400).send("Mesa não encontrada!");
+    }
+
+    next();
+}
+
+async function deletaPedidoMiddleware(req,res,next) {
+    const {id} = req.params;
+    const pedido = await pedidoModel.pegaPedidoPeloIdModel(id);
+    if(!id) {
+        return res.status(404).send("dado inválido!");
+    }
+
+    if(!pedido){
+        return res.status(400).send("Pedido não encontrado!");
+    }
+
+    next();
 }
 
 
@@ -49,5 +105,9 @@ async function listarPedidos(params) {
 module.exports = {
     criarPedidoMiddleware,
     inserirItemPedidoMiddleware,
-    deletaItemPedidoMiddleware
+    deletaItemPedidoMiddleware,
+    detalhespedidoMiddleware,
+    finalizaPedidoMiddleware,
+    deletaPedidoMiddleware,
+    pegaPedidoPeloIdMiddleware
 }
