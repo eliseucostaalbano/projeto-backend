@@ -21,7 +21,7 @@ async function getMesasById(req, res) {
 
     }
 
-    return res.send(mesa)
+    return res.status(400).send(mesa)
 }
 
 async function insertMesas(req, res) {
@@ -44,7 +44,7 @@ async function updateMesas(req, res) {
     } catch (error) {
         return res.send(error.message).status(400)
     }
-    return res.send("Mesa atualizada com sucesso")
+    return res.status(200).send("Mesa atualizada com sucesso")
 }
 
 async function deleteMesas(req, res) {
@@ -54,7 +54,7 @@ async function deleteMesas(req, res) {
     } catch (error) {
         return res.send(error.message).status(400)
     }
-    return res.send("Mesa deletada com sucesso")
+    return res.status(200).send("Mesa deletada com sucesso")
 }
 
 module.exports = {

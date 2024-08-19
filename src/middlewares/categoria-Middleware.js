@@ -31,7 +31,7 @@ async function insertNovaCategoriaMiddleware (req, res, next){
         return res.status (404).send("Dados inválidos")
     }
 
-    const categoria = await categoriasModels.insertNovaCategoriaModel(nome_categoria)
+    const categoria = await categoriasModels.getCategoriaByNameModel(nome_categoria)
 
     if(categoria){
         return res.status (404).send("Categoria já cadastrada")
