@@ -14,10 +14,10 @@ async function criarPedido(req, res) {
 }
 
 async function inserirItemPedido(req, res) {
-    const { quantidade, id_mesa, id_produto } = req.body;
+    const { quantidade, id_pedido, id_produto } = req.body;
 
     try {
-        await pedidoModel.inserirItemPedidoModel(quantidade, id_mesa, id_produto);
+        await pedidoModel.inserirItemPedidoModel(quantidade, id_pedido, id_produto);
     } catch (error) {
         return res
             .status(400)
@@ -85,7 +85,7 @@ async function finalizaPedido(req, res) {
         return res.status(400).send(error);
     }
 
-    return res.status(200).send("Pedido finalizado!")
+    return res.status(200).send("Mesa liberada para uso!")
 }
 
 async function deletaPedido(req, res) {

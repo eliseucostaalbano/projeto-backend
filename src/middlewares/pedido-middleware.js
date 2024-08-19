@@ -17,9 +17,9 @@ async function criarPedidoMiddleware(req, res, next){
 }
 
 async function inserirItemPedidoMiddleware(req, res,next) {
-    const {quantidade, id_mesa, id_produto} = req.body;
+    const {quantidade, id_pedido, id_produto} = req.body;
 
-    if(!quantidade, !id_mesa, !id_produto){
+    if(!quantidade || !id_pedido  || !id_produto){
         return res.status(404).send("Dados incorretos");
     }
 
@@ -58,7 +58,7 @@ async function deletaItemPedidoMiddleware(req,res, next) {
 
 async function detalhespedidoMiddleware(req, res, next) {
     const {id} = req.params;
-    const pedido = await mesasModel.getMesaByIdModel(id)
+    const pedido = await pedidoModel.pegaPedidoPeloIdModel(id)
 
     if(!id) {
         return res.status(404).send("dado inválido!");

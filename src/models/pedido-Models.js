@@ -36,10 +36,10 @@ async function  statusPorId(id) {
     return status.rows[0];
 }
 
-async function inserirItemPedidoModel(quantidade, id_mesa, id_produto) {
+async function inserirItemPedidoModel(quantidade, id_pedido, id_produto) {
     await connection.query(`
-        INSERT INTO itenspedidos(quantidade, id_mesa, id_produto)
-        VALUES (${quantidade}, ${id_mesa}, ${id_produto})
+        INSERT INTO itenspedidos(quantidade, id_pedido, id_produto)
+        VALUES (${quantidade}, ${id_pedido}, ${id_produto})
     `)
     return;
 }
@@ -62,10 +62,10 @@ async function listarPedidosModel() {
 
 async function detalhespedidoModel(id) {
     const detalhesPedido = await connection.query(`
-        SELECT quantidade, id_produto FROM itenspedidos ip
-        INNER JOIN mesas me ON ip.id_mesa = me.id
-        INNER JOIN produtos pro ON ip.id_produto = pro.id
-        WHERE ip.id_mesa = ${id}
+        SELECT * FROM itenspedidos ip
+        INNER JOIN pedidos pe ON pe.id = ip.id_pedido
+        INNER JOIN produtos pro ON pro.id = ip.id_produto
+        WHERE ip.id_pedido = ${id}
     `)
 
     return detalhesPedido.rows;
