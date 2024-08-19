@@ -71,6 +71,21 @@ async function detalhespedidoMiddleware(req, res, next) {
     next();
 }
 
+async function totalPedidoMiddleware(req,res, next) {
+    const {id} = req.params;
+    const pedido = await pedidoModel.pegaPedidoPeloIdModel(id)
+
+    if(!id) {
+        return res.status(404).send("dado inválido!");
+    }
+
+    if(!pedido){
+        return res.status(400).send("Pedido não encontrado!");
+    }
+
+    next()
+}
+
 async function finalizaPedidoMiddleware(req,res,next) {
     const {id} = req.params;
     const pedido = await mesasModel.getMesaByIdModel(id)
@@ -109,5 +124,6 @@ module.exports = {
     detalhespedidoMiddleware,
     finalizaPedidoMiddleware,
     deletaPedidoMiddleware,
-    pegaPedidoPeloIdMiddleware
+    pegaPedidoPeloIdMiddleware,
+    totalPedidoMiddleware
 }

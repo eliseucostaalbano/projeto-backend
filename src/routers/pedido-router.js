@@ -4,7 +4,6 @@ const validadorMiddleware = require('../middlewares/validador-middleware');
 const criarPedidoMiddleware = require("../middlewares/pedido-middleware");
 const criarPedidoController = require("../controllers/pedido-controller");
 
-router
 
 router.get("/pedidos",
     validadorMiddleware.validateTokenMiddleware,
@@ -16,6 +15,12 @@ router.get(
     validadorMiddleware.validateTokenMiddleware,
     criarPedidoMiddleware.detalhespedidoMiddleware,
     criarPedidoController.detalhesPedido
+)
+
+router.get("/pedido/comanda/:id",
+    validadorMiddleware.validateTokenMiddleware,
+    criarPedidoMiddleware.totalPedidoMiddleware,
+    criarPedidoController.totalPedido
 )
 
 router.post(

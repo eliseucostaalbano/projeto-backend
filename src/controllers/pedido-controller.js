@@ -76,6 +76,26 @@ async function detalhesPedido(req, res) {
     return res.status(200).send(itenspedidos);
 }
 
+async function totalPedido(req,res) {
+    const {id} = req.params;
+
+    try {
+        var detalhesPedido = await pedidoModel.detalhespedidoModel(id)
+        var valorTotal = await pedidoModel.totalPedidoModel(id);
+        
+        var detalhes = {
+            itens: detalhesPedido,
+            valor: valorTotal
+        }
+
+    } catch (error) {
+        return res.status(400).send(error);
+    }
+
+    return res.status(200).send(detalhes)
+
+}
+
 async function finalizaPedido(req, res) {
     const { id } = req.params;
 
@@ -108,5 +128,6 @@ module.exports = {
     detalhesPedido,
     finalizaPedido,
     deletaPedido,
-    pegaPedidoPeloId
+    pegaPedidoPeloId,
+    totalPedido
 }

@@ -68,7 +68,21 @@ async function detalhespedidoModel(id) {
         WHERE ip.id_pedido = ${id}
     `)
 
+    console.log(detalhesPedido.rows)
+
     return detalhesPedido.rows;
+}
+
+async function totalPedidoModel(id) {
+    const resultado = await connection.query(`
+        SELECT SUM(cast(pr.preco AS DECIMAL(10, 2)) * ip.quantidade) AS total_pedido
+        FROM itenspedidos ip
+        JOIN pedidos pe ON pe.id = ip.id_pedido
+        JOIN produtos pr ON pr.id = ip.id_produto
+        WHERE ip.id_pedido = ${id}
+    `);
+
+    return resultado.rows[0].total_pedido;
 }
 
 async function finalizaPedidoModel(id) {
@@ -99,5 +113,6 @@ module.exports = {
     detalhespedidoModel,
     finalizaPedidoModel,
     deletaPedidoModel,
-    pegaPedidoPeloIdModel
+    pegaPedidoPeloIdModel,
+    totalPedidoModel
 }
